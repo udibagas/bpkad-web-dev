@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="post">
+      <div class="form-group">
+        <label for="name" class="form-label">Nama Lengkap</label>
+        <input
+          type="text"
+          id="name"
+          class="form-input"
+          name="name"
+          required
+          maxlength="10"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-input" name="email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-input"
+          name="password"
+          maxlength="8"
+          minlength="3"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="dateOfBirth" class="form-label">Tanggal Lahir</label>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" />
+      </div>
+
+      <div class="form-group">
+        <label for="children" class="form-label">Jumlah Anak</label>
+        <input type="number" id="children" name="children" />
+      </div>
+
+      <div class="form-group">
+        <label for="status" class="form-label">Status</label>
+        <input type="radio" value="menikah" name="status" /> Menikah
+        <input type="radio" value="belum menikah" name="status" /> Belum Menikah
+      </div>
+
+      <div class="form-group">
+        <label for="hobby" class="form-label">Hobby</label>
+        <input type="checkbox" value="memancing" name="hobby" /> memancing
+        <input type="checkbox" value="woodworking" name="hobby" /> woodworking
+        <input type="checkbox" value="sepeda" name="hobby" /> sepeda
+      </div>
+
+      <div class="form-group">
+        <label for="hobby2" class="form-label">Hobby</label>
+        <select name="hobby2" id="hobby2">
+          <option value="memancing">Memancing</option>
+          <option value="woodworking">Woodworking</option>
+          <option value="sepeda">Sepeda</option>
+          <option value="berkebun">Berkebun</option>
+          <option value="membaca">Membaca</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="about" class="form-label">Tentang Saya</label>
+        <textarea name="about" id="about" rows="3" cols="30">
+          uhhiuuiefw
+          uifgewuifguewf
+          jhbdjehwbfew
+        </textarea>
+      </div>
+
+      <button type="submit">Kirim</button>
+      <button type="reset">Reset</button>
+    </form>
+  </body>
+</html>
