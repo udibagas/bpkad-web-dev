@@ -1,9 +1,3 @@
-const tarif = {
-  "Anak - anak": 25_000,
-  Dewasa: 50_000,
-  Lansia: 30_000,
-};
-
 // main function
 function beliTiket(umur, jumlahTiket) {
   const riwayatPembelian = [];
@@ -36,6 +30,12 @@ function kategoriBerdasarkanUmur(umur) {
 
 // sub function
 function hitungTotalHarga(kategori, jumlahTiket) {
+  const tarif = {
+    "Anak - anak": 25_000,
+    Dewasa: 50_000,
+    Lansia: 30_000,
+  };
+
   const harga = tarif[kategori] * jumlahTiket;
   const ppn = harga * 0.11;
   return harga + ppn;
