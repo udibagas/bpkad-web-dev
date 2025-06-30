@@ -21,6 +21,9 @@ nav {
   padding: 20px;
   text-align: right;
 
+/* div, p, h = block */
+/* label, input, span, = inline */
+
   li {
     display: inline;
     /* margin-right: 20px;  */
@@ -31,7 +34,7 @@ nav {
 
   a {
     color: white;
-    text-decoration: none; 
+    text-decoration:none; 
   }
 }
 
