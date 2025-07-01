@@ -37,8 +37,12 @@ function hitungTotalHarga(kategori, jumlahTiket) {
   };
 
   const harga = tarif[kategori] * jumlahTiket;
-  const ppn = harga * 0.11;
+  const ppn = calculateTax(harga);
   return harga + ppn;
+}
+
+function calculateTax(amount, taxRate = 0.12) {
+  return amount * taxRate;
 }
 
 // input
