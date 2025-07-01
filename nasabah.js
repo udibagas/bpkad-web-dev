@@ -1,12 +1,12 @@
 function daftarNasabahLolos(listNasabah) {
   const hasil = {};
-  for (let nasabah of listNasabah) {
-    if (nasabah.nilaiKredit >= 75) {
-      if (hasil[nasabah.kelasKredit] == undefined) {
-        hasil[nasabah.kelasKredit] = [];
+  for (let { kelasKredit, nilaiKredit, nama } of listNasabah) {
+    if (nilaiKredit >= 75) {
+      if (hasil[kelasKredit] == undefined) {
+        hasil[kelasKredit] = [];
       }
 
-      hasil[nasabah.kelasKredit].push(nasabah);
+      hasil[kelasKredit].push(nama);
     }
   }
 
