@@ -1,17 +1,25 @@
-const todos = [
-  {
-    id: 1,
-    text: "Belajar HTML",
-    done: true,
-  },
-  {
-    id: 2,
-    text: "Belajar CSS",
-    done: false,
-  },
-];
+// const todos = [
+//   {
+//     id: 1,
+//     text: "Belajar HTML",
+//     done: true,
+//   },
+//   {
+//     id: 2,
+//     text: "Belajar CSS",
+//     done: false,
+//   },
+// ];
+
+// initial load from localStorage
+const todos = JSON.parse(localStorage.getItem("todos")) || [];
+console.log("Loaded todos:", todos);
 
 renderTodos();
+
+function saveTodos(todos) {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 function doneTodo(id) {
   console.log("Done button clicked for ID:", id);
@@ -19,6 +27,7 @@ function doneTodo(id) {
   if (todo) {
     todo.done = !todo.done; // toggle the done status
     renderTodos(); // re-render the todo list
+    saveTodos(todos);
   } else {
     console.error("Todo not found with ID:", id);
   }
@@ -30,6 +39,7 @@ function delTodo(id) {
   if (todoIndex !== -1) {
     todos.splice(todoIndex, 1); // remove the todo from the array
     renderTodos(); // re-render the todo list
+    saveTodos(todos); // save the updated todos array to localStorage
   } else {
     console.error("Todo not found with ID:", id);
   }
@@ -116,6 +126,9 @@ function addBtnHandler(event) {
   // push the new todo to the todos array
   todos.push(newTodo);
 
+  // save the updated todos array to localStorage
+  saveTodos(todos);
+
   // render ulang
   renderTodos();
 
@@ -149,4 +162,4 @@ function addBtnHandler(event) {
 //   });
 // }
 
-registerEventListener();
+// registerEventListener();
