@@ -86,7 +86,65 @@ function renderProducts() {
         <strong>Title</strong>: ${product.title}
         <br />
         <strong>Description</strong>: ${product.description}
+
+        <div>
+        <button class="btn btn-danger" onclick="deleteProduct(${product.id})">
+        Delete
+        </button>
+
+        <button class="btn btn-success" onclick="editProduct(${product.id})">
+        Edit
+        </button>
+        </div>
       </div>
     `;
   });
+}
+
+function deleteProduct(id) {
+  const indexProduct = products.findIndex((p) => p.id === id);
+  if (indexProduct === -1) {
+    console.log("Product not found");
+    return;
+  }
+
+  products.splice(indexProduct, 1);
+  localStorage.setItem("products", JSON.stringify(products));
+  renderProducts();
+}
+
+function editProduct(id) {
+  // 1. Get product by id
+  const product = products.find((p) => p.id === id);
+  if (!product) {
+    console.log("Product not found");
+    return;
+  }
+
+  // 2. populate form based on product object
+  document.querySelector("#product-name").value = product.name;
+  document.querySelector("#product-price").value = product.price;
+  document.querySelector("#stock-status").value = product.status;
+
+  const submitBtnEl = document.querySelector("#update-button");
+  submitBtnEl.classList.remove("d-none");
+  document.querySelector("#submit-button").classList.add("d-none");
+
+  submitBtnEl.removeEventListener("click", () => updateProduct(id));
+  submitBtnEl.addEventListener("click", () => updateProduct(id));
+}
+
+function updateProduct(id) {
+  const product = products.find((p) => p.id === id);
+  if (!product) {
+    console.log("Product not found");
+    return;
+  }
+
+  product.name = document.querySelector("#product-name").value;
+  product.price = document.querySelector("#product-price").valueAsNumber;
+  product.status = document.querySelector("#stock-status").value;
+
+  renderProducts();
+  localStorage.setItem("products", products);
 }
