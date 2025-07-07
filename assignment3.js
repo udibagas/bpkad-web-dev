@@ -1,12 +1,23 @@
 const products = JSON.parse(localStorage.getItem("products") || "[]");
 
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. handle event listeners for the form submission
-  // const form = document.querySelector("form");
-  const form = document.querySelector("#product-form");
-  console.log("Form element:", form);
-  form.addEventListener("submit", handleFormSubmit);
-  renderProducts();
+// 1. handle event listeners for the form submission
+// const form = document.querySelector("form");
+const form = document.querySelector("#product-form");
+console.log("Form element:", form);
+form.addEventListener("submit", handleFormSubmit);
+renderProducts();
+
+const stockStatus = document.querySelector("#stock-status");
+
+stockStatus.addEventListener("change", (event) => {
+  const status = event.target.value;
+
+  if (status === "Out of Stock") {
+    document.querySelector("#product-stock").disabled = true;
+    document.querySelector("#product-stock").value = 0;
+  } else {
+    document.querySelector("#product-stock").disabled = false;
+  }
 });
 
 async function handleFormSubmit(event) {
@@ -47,7 +58,7 @@ async function handleFormSubmit(event) {
     products.push(product);
 
     // 6. save to localstorage
-    localStorage.setItem("products", JSON.stringify(products));
+    saveProducts();
 
     // 7. Reset the form fields
     event.target.reset();
@@ -109,7 +120,7 @@ function deleteProduct(id) {
   }
 
   products.splice(indexProduct, 1);
-  localStorage.setItem("products", JSON.stringify(products));
+  saveProducts();
   renderProducts();
 }
 
@@ -146,5 +157,9 @@ function updateProduct(id) {
   product.status = document.querySelector("#stock-status").value;
 
   renderProducts();
-  localStorage.setItem("products", products);
+  saveProducts();
+}
+
+function saveProducts() {
+  localStorage.setItem("products", JSON.stringify(products));
 }
