@@ -1,4 +1,4 @@
-const products = [];
+const products = JSON.parse(localStorage.getItem("products") || "[]");
 
 document.addEventListener("DOMContentLoaded", () => {
   // 1. handle event listeners for the form submission
@@ -21,6 +21,7 @@ function handleFormSubmit(event) {
   const productPrice = event.target[2].valueAsNumber;
 
   const product = {
+    id: Date.now(),
     name: productName,
     status: productStatus,
     price: productPrice,
@@ -31,10 +32,13 @@ function handleFormSubmit(event) {
   // 4. push ke products array
   products.push(product);
 
-  // 5. Reset the form fields
+  // 5. save to localstorage
+  localStorage.setItem("products", JSON.stringify(products));
+
+  // 6. Reset the form fields
   event.target.reset();
 
-  // 6. render the products
+  // 7. render the products
   renderProducts();
 }
 
