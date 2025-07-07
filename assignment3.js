@@ -6,19 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#product-form");
   console.log("Form element:", form);
   form.addEventListener("submit", handleFormSubmit);
-
-  // 2. validate the form inputs
-
-  // 3. get the form data
-
-  // 4. push ke products array
-
-  // 5. render the products
 });
 
 function handleFormSubmit(event) {
-  event.preventDefault(); // Prevent the default form submission behavior
+  // Prevent the default form submission behavior
+  event.preventDefault();
+
+  // 2. TODO: validate the form inputs
+
   console.log("Form submitted", event);
+  // 3. get the form data
   const productName = event.target[0].value;
   const productStatus = event.target[1].value;
   const productPrice = event.target[2].valueAsNumber;
@@ -31,8 +28,13 @@ function handleFormSubmit(event) {
 
   console.log("Product object:", product);
 
+  // 4. push ke products array
   products.push(product);
-  event.target.reset(); // Reset the form fields
+
+  // 5. Reset the form fields
+  event.target.reset();
+
+  // 6. render the products
   renderProducts();
 }
 
