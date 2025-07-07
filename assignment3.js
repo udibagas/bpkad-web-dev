@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("#product-form");
   console.log("Form element:", form);
   form.addEventListener("submit", handleFormSubmit);
+  renderProducts();
 });
 
 function handleFormSubmit(event) {
