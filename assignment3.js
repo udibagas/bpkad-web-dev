@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
 });
 
-function handleFormSubmit(event) {
+async function handleFormSubmit(event) {
   // Prevent the default form submission behavior
   event.preventDefault();
 
@@ -21,39 +21,49 @@ function handleFormSubmit(event) {
   const productStatus = event.target[1].value;
   const productPrice = event.target[2].valueAsNumber;
 
-  const product = {
-    id: Date.now(),
-    name: productName,
-    status: productStatus,
-    price: productPrice,
-  };
+  // 4. Fetch additional data from an API
+  try {
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/1"
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
 
-  console.log("Product object:", product);
+    const json = await response.json();
 
-  // 4. push ke products array
-  products.push(product);
+    const product = {
+      id: Date.now(),
+      name: productName,
+      status: productStatus,
+      price: productPrice,
+      title: json.title,
+      description: json.body,
+    };
 
-  // 5. save to localstorage
-  localStorage.setItem("products", JSON.stringify(products));
+    console.log("Product object:", product);
 
-  // 6. Reset the form fields
-  event.target.reset();
+    // 5. push ke products array
+    products.push(product);
 
-  // 7. render the products
-  renderProducts();
+    // 6. save to localstorage
+    localStorage.setItem("products", JSON.stringify(products));
+
+    // 7. Reset the form fields
+    event.target.reset();
+
+    // 8. render the products
+    renderProducts();
+  } catch (error) {
+    console.log("Error fetching data from API:", error);
+  }
 }
 
 function renderProducts() {
   const productList = document.querySelector("#product-list");
   productList.innerHTML = ""; // Clear the existing product list
 
-  products.forEach(async (product) => {
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/posts/1"
-    );
-    const json = await response.json();
-    console.log(json);
-
+  products.forEach((product) => {
     productList.innerHTML += `
       <div class="m-3 border p-4 rounded shadow">
         <h3>${product.name}</h3>
@@ -73,9 +83,9 @@ function renderProducts() {
 
         <h6 class="mt-4">Additional Info from API</h6>
         <hr />
-        <strong>Title</strong>: ${json.title}
+        <strong>Title</strong>: ${product.title}
         <br />
-        <strong>Description</strong>: ${json.body}
+        <strong>Description</strong>: ${product.description}
       </div>
     `;
   });
